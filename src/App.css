@@ -15,7 +15,8 @@ a {
 }
 .logo {
   width: 50px;
-  display: block;
+  height: 50px;
+  background: url('./img/Freepnglogos-Free-PNG.2cbfda943f6d6da33482.png') no-repeat center;
 }
 .header {
   grid-column: span 2;
@@ -27,7 +28,6 @@ a {
 .content__img {
   width: 97%;
   height: 170px;
-  background: url('https://jenmulligandesign.com/wp-content/uploads/2017/04/pexels-beach-tropical-scene-free-stock-photo.jpg')
-  no-repeat center;
+  background: url('./img/pexels-beach-tropical-scene-free-stock-photo.3da99abc38d2afb5069a.jpg') no-repeat center;
   object-fit: fill;
 }
