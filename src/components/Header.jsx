@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <header className='header'>
-      <div className='logo'></div>
+      <img className='logo' src="https://www.pngplay.com/wp-content/uploads/13/Freepnglogos-Free-PNG.png" />
     </header>
   );
 };
