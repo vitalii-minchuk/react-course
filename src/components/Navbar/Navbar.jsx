@@ -8,7 +8,7 @@ const Navbar = () => {
             <a href='#'>Profile</a>
           </li>
           <li>
-            <a href='#'>Message</a>
+            <a href='#'>Dialogues</a>
           </li>
           <li>
             <a href='#'>News</a>

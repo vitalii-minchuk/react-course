@@ -1,0 +1,9 @@
+
+.contentImg {
+  width: 97%;
+  height: 170px;
+  background: url('https://jenmulligandesign.com/wp-content/uploads/2017/04/pexels-beach-tropical-scene-free-stock-photo.jpg') no-repeat center;
+  object-fit: cover;
+  background-size: 100%;
+  margin-bottom: 15px;
+}
