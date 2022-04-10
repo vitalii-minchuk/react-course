@@ -6,7 +6,8 @@
 }
 
 .textarea {
-  width: 35%;
+  padding: 5px;
+  width: 40%;
 }
 .addBtn {
   color: #fff;

@@ -2,10 +2,7 @@ ul li {
   list-style-type: square;
   padding: 5px;
 }
-a {
-  color: #fff;
-  text-decoration: none;
-}
+
 .app__wrapper {
   display: grid;
   grid-template-columns: 1fr 5fr;

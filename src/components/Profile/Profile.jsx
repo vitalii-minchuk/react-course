@@ -2,13 +2,13 @@ import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import s from "./Profile.module.css"
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div>
       <h4>My Profile</h4>
       <div className={s.contentImg}>
       </div>
-      <MyPosts />
+      <MyPosts addPost={props.addPost} state={props.state} />
     </div>
   );
 };

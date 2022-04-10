@@ -1,22 +1,27 @@
 import React from "react";
-import s from "./Dialogues.module.css"
+import { Link } from "react-router-dom";
+import s from "./Dialogues.module.css";
+import MessageItem from "./MessageItem/Message";
+import DialogueItem from "./DialogueItem/DialogueItem";
 
-const Dialogues = () => {
+const Dialogues = (props) => {
+  let messageElements = props.state.dialogues.messagesData.map((mes) => {
+    return <MessageItem key={mes.id} id={mes.id} message={mes.message}/>
+  });
+
+  let dialogueElements = props.state.dialogues.dialoguesData.map((user) => {
+    return <DialogueItem key={user.id} id={user.id} name={user.name}/>
+  })
+
   return (
     <div>
       <h4>My Dialogues</h4>
-      <div>
-        <ul>
-          <li>Alex</li>
-          <li>Alex</li>
-          <li>Alex</li>
-          <li>Alex</li>
+      <div className={s.dialogues}>
+        <ul className={s.list}>
+          { dialogueElements }
         </ul>
-        <div>
-          
-          <p>Hey</p>
-          <p>Hey</p>
-          <p>Hey</p>
+        <div className={s.messages}>
+          { messageElements }
         </div>
       </div>
       <div className={s.box}>
