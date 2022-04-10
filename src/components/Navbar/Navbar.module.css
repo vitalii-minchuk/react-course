@@ -1,4 +1,23 @@
 .nav {
   border: 1px solid #999;
   margin-left: 10px;
+  padding: 10px;
+}
+
+.list {
+  padding: 0;
+}
+
+.item {
+  list-style: none;
+}
+
+.item a {
+  text-decoration: none;
+  color: #fff;
+  transition: all .3s;
+}
+
+.item:hover a {
+  color: #333;
 }

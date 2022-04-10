@@ -8,7 +8,11 @@ const Profile = (props) => {
       <h4>My Profile</h4>
       <div className={s.contentImg}>
       </div>
-      <MyPosts addPost={props.addPost} state={props.state} />
+      <MyPosts
+        addPost={props.addPost}
+        profilePage={props.profilePage}
+        updatePostText={props.updatePostText}
+      />
     </div>
   );
 };

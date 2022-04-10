@@ -4,7 +4,8 @@ import s from "./MyPosts.module.css"
 
 
 const MyPosts = (props) => {
-  let postItems = props.state.postData.map(el => {
+  
+  let postItems = props.profilePage.postData.map(el => {
     return <Post
       key={el.id}
       id={el.id}
@@ -12,24 +13,29 @@ const MyPosts = (props) => {
       likesCount={el.likesCount}
       src={el.src}
     />
-  })
-
+  });
   	
   const textareaValue = React.createRef();
-  let id = 6;
+  
   const addText = () => {
+    props.addPost();
+  };
+
+  let onPostChange = () => {
     let text = textareaValue.current.value;
-    let num = Math.floor(Math.random()*1000)
-    id++
-    console.log(num);
-    props.addPost(text,id, num)
+    props.updatePostText(text);
   };
 
   return (
     <div>
       <h5>My Posts</h5>
       <div className={s.box}>
-        <textarea ref={textareaValue} className={s.textarea}></textarea>
+        <textarea
+          onChange={onPostChange}
+          ref={textareaValue}
+          className={s.textarea}
+          value={props.profilePage.newPostText}
+        />
         <button onClick={addText} className={s.addBtn}>Add Post</button>
       </div>
       <div>

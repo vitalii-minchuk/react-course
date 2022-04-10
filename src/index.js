@@ -1,13 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css'
+import state from "./redax/state";
+import { rerenderEntireTree } from "./render";
 
-const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container)
-
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+rerenderEntireTree (state)

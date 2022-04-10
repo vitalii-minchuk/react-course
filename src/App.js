@@ -6,10 +6,9 @@ import ErrorPage from './components/ErrorPage/ErrorPage';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import state, { addPost } from './redax/state';
 
 
-const App = () => {
+const App = (props) => {
   return (
     <BrowserRouter>
       <div className='app__wrapper'>
@@ -17,8 +16,13 @@ const App = () => {
         <Navbar />
         <main className='main'>
           <Routes>
-            <Route path='/profile' element={<Profile addPost={addPost} state={state} />} />
-            <Route path='/dialogues/*' element={<Dialogues state={state} />} />
+            <Route path='/profile' element={<Profile
+                addPost={props.addPost}
+                profilePage={props.state.profilePage}
+                updatePostText={props.updatePostText}
+              />}
+            />
+            <Route path='/dialogues/*' element={<Dialogues state={props.state} />} />
             <Route path='*' element={<ErrorPage />} />
           </Routes>
         </main>

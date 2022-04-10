@@ -1,11 +1,17 @@
+import { rerenderEntireTree } from "../render";
+
 let state = {
-  postData: [
-    {id: 1, message: "its my first post", likesCount: 124, src: "https://images.pexels.com/photos/990349/pexels-photo-990349.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"},
-    {id: 2, message: "yo yo yo", likesCount: 15, src: "https://images.pexels.com/photos/312839/pexels-photo-312839.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"},
-    {id: 3, message: "hey", likesCount: 1, src: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"},
-    {id: 4, message: "gasdfgadfg fdgafgasg", likesCount: 5, src: "https://www.stockvault.net/data/2019/03/11/261989/thumb16.jpg"},
-    {id: 5, message: "hey", likesCount: 33, src: "https://www.inpixio.com/remove-background/images/main-after.jpg"},
-  ],
+  profilePage: {
+    postData: [
+      {id: 1, message: "its my first post", likesCount: 124, src: "https://images.pexels.com/photos/990349/pexels-photo-990349.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"},
+      {id: 2, message: "yo yo yo", likesCount: 15, src: "https://images.pexels.com/photos/312839/pexels-photo-312839.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"},
+      {id: 3, message: "hey", likesCount: 1, src: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"},
+      {id: 4, message: "gasdfgadfg fdgafgasg", likesCount: 5, src: "https://www.stockvault.net/data/2019/03/11/261989/thumb16.jpg"},
+      {id: 5, message: "hey", likesCount: 33, src: "https://www.inpixio.com/remove-background/images/main-after.jpg"},
+    ],
+    newPostText: "",
+  },
+  
   dialogues: {
     messagesData: [
       {message: "Hi", id: 1},
@@ -24,13 +30,22 @@ let state = {
   }
 };
 
-export const addPost = (text, id, num) =>{
+window.state = state
+
+export const addPost = () =>{
   let newPost = {
-    id,
-    message: text,
-    likesCount: num,
+    id: 6,
+    message: state.profilePage.newPostText,
+    likesCount: 0,
+    src: 'https://pngset.com/images/the-team-aone-group-holdings-ltd-circle-user-icon-svg-text-symbol-number-disk-transparent-png-2898374.png',
   }
-  state.postData.push(newPost);
+  state.profilePage.postData.push(newPost);
+  state.profilePage.newPostText = "";
+  rerenderEntireTree(state);
+}
+export const updatePostText = (newText) =>{
+  state.profilePage.newPostText = newText;
+  rerenderEntireTree(state);
 }
 
 export default state;
