@@ -1,3 +1,6 @@
+import dialoguesReducer from "./dialogues-reducer";
+import profileReducer from "./profile-reducer";
+
 let store = {
   _state: {
     profilePage: {
@@ -18,6 +21,7 @@ let store = {
         {message: "Lorem ipsum", id: 4},
         {message: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit quas quisquam accusamus natus fuga? Delectus, natus deleniti! Mollitia eaque optio similique tempore itaque ab repudiandae officia, reprehenderit recusandae ipsa. Necessitatibus.", id: 5},
       ],
+      newMessageBody: '',
       dialoguesData: [
         {name: "Alex", id: 1},
         {name: "Ed", id: 2},
@@ -37,20 +41,10 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch (action) {
-    if (action.type === 'ADD-POST') {
-      let newPost = {
-        id: 6,
-        message: this._state.profilePage.newPostText,
-        likesCount: 0,
-        src: 'https://pngset.com/images/the-team-aone-group-holdings-ltd-circle-user-icon-svg-text-symbol-number-disk-transparent-png-2898374.png',
-      }
-      this._state.profilePage.postData.push(newPost);
-      this._state.profilePage.newPostText = "";
-      this._callSubscriber(this._state);
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state);
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogues = dialoguesReducer(this._state.dialogues, action);
+
+    this._callSubscriber(this._state);
   },
 };
 

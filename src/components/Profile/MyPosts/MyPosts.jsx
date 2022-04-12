@@ -1,6 +1,8 @@
 import React from "react";
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
+import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profile-reducer";
+
 
 
 const MyPosts = (props) => {
@@ -17,13 +19,13 @@ const MyPosts = (props) => {
   	
   const textareaValue = React.createRef();
   
-  const addText = () => {
-    props.dispatch({type: 'ADD-POST'});
+  const addPost = () => {
+    props.dispatch(addPostActionCreator());
   };
 
   let onPostChange = () => {
     let text = textareaValue.current.value;
-    props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
+    props.dispatch(updateNewPostTextActionCreator(text));
   };
 
   return (
@@ -36,7 +38,7 @@ const MyPosts = (props) => {
           className={s.textarea}
           value={props.profilePage.newPostText}
         />
-        <button onClick={addText} className={s.addBtn}>Add Post</button>
+        <button onClick={addPost} className={s.addBtn}>Add Post</button>
       </div>
       <div>
         { postItems }
