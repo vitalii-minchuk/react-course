@@ -13,7 +13,7 @@ const Dialogues = (props) => {
   });
   
   let onSendMessageClick = () => {
-    props.onSendMessage();
+    props.SendMessage();
   };
   let onNewMessageChange = (evt) => {
     let body = evt.target.value;

@@ -19,6 +19,9 @@ const Navbar = () => {
             <a href='#'>Music</a>
           </li>
           <li className={s.item}>
+            <Link to='/users'>Users</Link>
+          </li>
+          <li className={s.item}>
             <a className={s.active} href='#'>Settings</a>
           </li>
         </ul>
