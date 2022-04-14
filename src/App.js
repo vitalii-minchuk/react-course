@@ -17,8 +17,7 @@ const App = (props) => {
         <Navbar />
         <main className='main'>
           <Routes>
-            <Route path='/profile' element={<Profile />}
-            />
+            <Route path='/profile' element={<Profile />} />
             <Route path='/dialogues/*' element={<DialoguesContainer />} />
             <Route path='/users' element={<UsersContainer />} />
             <Route path='*' element={<ErrorPage />} />

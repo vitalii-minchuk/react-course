@@ -5,6 +5,21 @@
   margin-bottom: 15px;
 }
 
+.pagination {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.pagination span{
+
+  padding: 0 5px;
+  color: #999;
+  cursor: pointer;
+}
+.selectedPage {
+  color: #fff !important;
+  font-weight: bold;
+}
 .info {
   width: 20%;
 
