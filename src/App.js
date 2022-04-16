@@ -4,6 +4,7 @@ import './App.css';
 import DialoguesContainer from './components/Dialogues/DialoguesContainer';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
@@ -13,7 +14,7 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <div className='app__wrapper'>
-        <Header />
+        <HeaderContainer />
         <Navbar />
         <main className='main'>
           <Routes>
