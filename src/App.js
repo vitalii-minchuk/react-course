@@ -5,7 +5,7 @@ import DialoguesContainer from './components/Dialogues/DialoguesContainer';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 
 
@@ -17,7 +17,8 @@ const App = (props) => {
         <Navbar />
         <main className='main'>
           <Routes>
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:userId' element={<ProfileContainer />} />
+            <Route path='/profile' element={<ProfileContainer />} />
             <Route path='/dialogues/*' element={<DialoguesContainer />} />
             <Route path='/users' element={<UsersContainer />} />
             <Route path='*' element={<ErrorPage />} />

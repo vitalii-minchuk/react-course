@@ -1,0 +1,38 @@
+.item {
+  width: 97%;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+.item *> p{
+  padding: 0;
+  margin: 0;
+}
+
+.picture {
+  min-width: 40%;
+}
+
+.userImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.userDesc {
+  margin-bottom: 15px;
+}
+
+.job {
+  margin-bottom: 15px;
+}
+
+.textName {
+  margin-bottom: 8px;
+  font-weight: 700;
+  text-transform: capitalize;
+}

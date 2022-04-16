@@ -24,7 +24,14 @@
   width: 20%;
 
 }
-
+.desc {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #999;
+  padding: 10px;
+}
 .userData {
   display: flex;
   flex-direction: column;
@@ -33,6 +40,8 @@
 
 .status {
   margin: 0;
+  max-width: 400px;
+  overflow: hidden;
 }
 
 .followBtn {
@@ -53,13 +62,7 @@
   border: 1px solid #333;
 }
 
-.desc {
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid #999;
-  padding: 10px;
-}
+
 .ava {
   display: block;
   width: 70px;
