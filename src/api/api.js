@@ -13,6 +13,15 @@ export const userAPI = {
     return instance.get("users?page=" + currentPage + "&count=" + pageSize)
       .then(response => response.data);
   },
+  unfollow(userId) {
+    return instance.delete("follow/" + userId)
+  },
+  follow(userId) {
+    return instance.post("follow/" + userId)
+  },
+  getProfile(userId) {
+    return instance.get("profile/" + userId)
+  },
 }
 
 export const authAPI = {

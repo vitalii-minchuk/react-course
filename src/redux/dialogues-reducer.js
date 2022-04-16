@@ -24,7 +24,7 @@ let initialState = {
     {name: "John", id: 3},
     {name: "Mary", id: 4},
     {name: "Sophy", id: 5},
-  ]
+  ],
 }
 
 const dialoguesReducer = (state = initialState, action) => {

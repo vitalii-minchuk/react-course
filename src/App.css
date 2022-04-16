@@ -3,6 +3,10 @@ ul li {
   padding: 5px;
 }
 
+button:disabled {
+  opacity: 0.3;
+}
+
 .app__wrapper {
   display: grid;
   grid-template-columns: 1fr 5fr;
