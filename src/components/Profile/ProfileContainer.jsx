@@ -1,47 +1,37 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUserProfileThunk } from "../../redux/profile-reducer";
+import { getStatus, getUserProfileThunk, updateStatus } from "../../redux/profile-reducer";
 import Profile from "./Profile";
-import { useLocation, useNavigate, useParams, Navigate } from "react-router-dom";
-
-const url = "https://social-network.samuraijs.com/api/1.0/";
+import { withAuthRedirect } from "../../HOC/AuthRedirect";
+import { compose } from "redux";
+import { withRouter } from "../../HOC/withRouter";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.userId ?? 2;
-    this.props.getUserProfileThunk(userId)
+    this.props.getUserProfileThunk(userId);
+    this.props.getStatus(userId)
   };
 
   render() {
-    if (!this.props.isAuth) return <Navigate to={"/login"} />
-
     return (
-      <Profile {...this.props} profile={this.props.profile} />
+      <Profile 
+        {...this.props}
+        profile={this.props.profile} 
+        status={this.props.status}
+        updateStatus={this.props.updateStatus}
+      />
     )
   }
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
-  isAuth: state.auth.isAuth
+  status: state.profilePage.status,
 });
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return (
-      <Component
-        {...props}
-        router={{ location, navigate, params }}
-      />
-    );
-  }
-
-  return ComponentWithRouterProp;
-}
-
-let withUrlDataContainerComponent = withRouter(ProfileContainer);
-
-export default connect(mapStateToProps, { getUserProfileThunk })(withUrlDataContainerComponent);
+export default compose(
+  connect(mapStateToProps, { getUserProfileThunk, getStatus, updateStatus }),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer);

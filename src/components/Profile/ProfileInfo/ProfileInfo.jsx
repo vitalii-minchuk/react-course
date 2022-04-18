@@ -1,6 +1,7 @@
 import React from "react";
 import Preloader from "../../common/preloader/Preloader";
 import s from "./ProfileInfo.module.css";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -30,6 +31,7 @@ const ProfileInfo = (props) => {
           <p className={s.textName}>about me:</p>
           <p>{props.profile.aboutMe}</p>
         </div>
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
       </div>
     </div>
   )
