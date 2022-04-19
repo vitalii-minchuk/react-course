@@ -1,0 +1,16 @@
+.title {
+  margin-bottom: 15px;
+}
+
+.form div {
+  margin-bottom: 10px;
+}
+
+.checkLabel {
+  cursor: pointer;
+}
+
+.check {
+  margin-right: 8px;
+  cursor: pointer;
+}
