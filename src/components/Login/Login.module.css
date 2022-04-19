@@ -8,9 +8,29 @@
 
 .checkLabel {
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .check {
   margin-right: 8px;
   cursor: pointer;
+}
+
+.loginBtn {
+  color: #fff;
+  padding: 5px 20px;
+  background-color: transparent;
+  border: 1px solid #999;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all .3s;
+}
+
+.loginBtn:hover {
+  color: #333;
+  padding: 5px 20px;
+  background-color: #999;
+  border: 1px solid #333;
+  cursor: pointer;
+  border-radius: 10px;
 }

@@ -1,7 +1,6 @@
 import { profileAPI, userAPI } from "../api/api";
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -13,7 +12,6 @@ let initialState = {
     {id: 4, message: "gasdfgadfg fdgafgasg", likesCount: 5, src: "https://www.stockvault.net/data/2019/03/11/261989/thumb16.jpg"},
     {id: 5, message: "hey", likesCount: 33, src: "https://www.inpixio.com/remove-background/images/main-after.jpg"},
   ],
-  newPostText: "",
   profile: null,
   status: "",
 }
@@ -23,7 +21,7 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       let newPost = {
         id: 6,
-        message: state.newPostText,
+        message: action.newPostText,
         likesCount: 0,
         src: 'https://pngset.com/images/the-team-aone-group-holdings-ltd-circle-user-icon-svg-text-symbol-number-disk-transparent-png-2898374.png',
       }
@@ -31,11 +29,6 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         newPostText: "",
         postData: [...state.postData, newPost],
-      };
-    case UPDATE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText,
       };
     case SET_USER_PROFILE:
       return {
@@ -53,16 +46,9 @@ const profileReducer = (state = initialState, action) => {
 };
 
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
+export const addPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostText });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({ type: SET_STATUS, status});
-export const updateNewPostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-  };
-};
-
 export const getUserProfileThunk = (userId) => {
   return (dispatch) => {
     userAPI.getProfile(userId).then(response => {

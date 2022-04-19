@@ -2,6 +2,11 @@
   display: grid;
   grid-template-columns: 1fr 7fr;
   grid-template-rows: repeat(2);
+  margin: 20px 0;
+}
+
+.form {
+  display: block;
   margin-bottom: 20px;
 }
 
