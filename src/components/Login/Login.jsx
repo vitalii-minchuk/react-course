@@ -44,6 +44,7 @@ const LoginForm = (props) => {
           validate={[required, maxLength40]}
         />
       </div>
+      {props.error && <div className={s.formSummaryError}>{props.error}</div>}
       <div>
         <label className={s.checkLabel}>
           <Field

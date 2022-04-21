@@ -5,7 +5,7 @@ import s from "./Header.module.css"
 const Header = (props) => {
   const onLogout = () => {
     props.logout()
-  }
+  };
 
   return (
     <header className={s.header}>
