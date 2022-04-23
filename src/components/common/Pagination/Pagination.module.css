@@ -14,3 +14,16 @@
   color: #fff !important;
   font-weight: bold;
 }
+.btn {
+  border: none;
+  background-color: transparent;
+  font-size: 22px;
+  padding: 5px;
+  margin-top: -11px;
+  color: #999;
+  cursor: pointer;
+}
+.btn:hover {
+  color: #fff !important;
+  font-weight: bold;
+}
