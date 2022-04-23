@@ -1,34 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Pagination from "../common/Pagination/Pagination";
 import s from './Users.module.css';
 
 const photo = 'https://pngset.com/images/the-team-aone-group-holdings-ltd-circle-user-icon-svg-text-symbol-number-disk-transparent-png-2898374.png';
 
 const Users = (props) => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-  let pages = [];
-  for (let i = 1; i < pagesCount; i++) {
-    pages.push(i);
-  }
-
+  
   return (
     <div>
-      <div className={s.pagination}>
-        {
-          pages.map(page => {
-            return (
-              <span
-                key={page}
-                className={props.currentPage === page ? s.selectedPage : undefined}
-                onClick={() => { props.onPageChanged(page) }}
-              >
-                {page}
-              </span>
-            )
-          })
-        }
-      </div>
+      <Pagination
+        onPageChanged={props.onPageChanged}
+        totalUsersCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+      />
       {
         props.users.map(user => <div className={s.item} key={user.id}>
           <div className={s.info}>

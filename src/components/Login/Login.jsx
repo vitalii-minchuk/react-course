@@ -24,10 +24,10 @@ const Login = (props) => {
 
 const maxLength40 = maxLength(40)
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
 
   return (
-    <form className={s.form} onSubmit={props.handleSubmit} >
+    <form className={s.form} onSubmit={handleSubmit} >
       <div>
         <Field
           placeholder={"Email"}
@@ -44,7 +44,7 @@ const LoginForm = (props) => {
           validate={[required, maxLength40]}
         />
       </div>
-      {props.error && <div className={s.formSummaryError}>{props.error}</div>}
+      {error && <div className={s.formSummaryError}>{error}</div>}
       <div>
         <label className={s.checkLabel}>
           <Field
