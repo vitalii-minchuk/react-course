@@ -3,15 +3,30 @@ import Preloader from "../../common/preloader/Preloader";
 import s from "./ProfileInfo.module.css";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
+const photo = 'https://pngset.com/images/the-team-aone-group-holdings-ltd-circle-user-icon-svg-text-symbol-number-disk-transparent-png-2898374.png';
+
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />
   }
 
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0])
+    }
+  }
+
   return (
     <div className={s.item}>
       <div className={s.picture}>
-        <img className={s.userImg} src={props.profile.photos.large} alt="user photo" />
+        <img
+          className={s.userImg}
+          src={props.profile.photos.large || photo}
+          alt="user photo"
+        />
+        {props.isOwner &&
+          <input className={s.addPhoto} onChange={onMainPhotoSelected} type={"file"} />
+        }
       </div>
       <div className={s.info}>
         <div className={s.userDesc}>

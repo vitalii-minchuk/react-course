@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Preloader from './components/common/preloader/Preloader';
-import DialoguesContainer from './components/Dialogues/DialoguesContainer';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
+
+const DialoguesContainer = React.lazy(() => import('./components/Dialogues/DialoguesContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 class App extends React.Component {
   componentDidMount() {
@@ -28,14 +29,16 @@ class App extends React.Component {
           <HeaderContainer />
           <Navbar />
           <main className='main'>
-            <Routes>
-              <Route path='/profile/:userId' element={<ProfileContainer />} />
-              <Route path='/profile' element={<ProfileContainer />} />
-              <Route path='/dialogues/*' element={<DialoguesContainer />} />
-              <Route path='/users' element={<UsersContainer />} />
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='*' element={<ErrorPage />} />
-            </Routes>
+            <Suspense fallback={<div>loading...</div>}>
+              <Routes>
+                <Route path='/profile/:userId' element={<ProfileContainer />} />
+                <Route path='/profile' element={<ProfileContainer />} />
+                <Route path='/dialogues/*' element={<DialoguesContainer />} />
+                <Route path='/users' element={<UsersContainer />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='*' element={<ErrorPage />} />
+              </Routes>
+            </Suspense>
           </main>
         </div>
       </BrowserRouter>
