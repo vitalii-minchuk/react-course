@@ -1,0 +1,37 @@
+.saveBtn {
+  color: #fff;
+  padding: 5px 20px;
+  background-color: transparent;
+  border: 1px solid #999;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all .3s;
+  margin-bottom: 15px;
+}
+
+.saveBtn:hover {
+  color: #333;
+  background-color: #999;
+  border: 1px solid #333;
+}
+
+.input {
+  margin-left: -30px;
+}
+
+.check {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.textarea {
+  margin-left: -30px;
+}
+
+.contacts {
+  margin-top: 5px;
+}
+
+.formSummaryError {
+  color: #E26578;
+}

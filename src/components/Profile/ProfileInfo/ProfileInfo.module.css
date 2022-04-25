@@ -27,16 +27,23 @@
   flex-grow: 1;
 }
 
-.userDesc {
+.editBtn {
+  color: #fff;
+  padding: 5px 20px;
+  background-color: transparent;
+  border: 1px solid #999;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all .3s;
   margin-bottom: 15px;
 }
 
-.job {
-  margin-bottom: 15px;
+.editBtn:hover {
+  color: #333;
+  background-color: #999;
+  border: 1px solid #333;
 }
 
-.textName {
-  margin-bottom: 8px;
-  font-weight: 700;
-  text-transform: capitalize;
+.contacts {
+  margin-left: 10px;
 }
