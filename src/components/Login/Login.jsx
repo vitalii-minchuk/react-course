@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    props.login(formData.email, formData.password, formData.rememberMe)
+    props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
   }
 
   if (props.isAuth) return <Navigate to={"/profile"} />
@@ -17,14 +17,14 @@ const Login = (props) => {
   return (
     <div>
       <h2 className={s.title}>login</h2>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     </div>
   )
 }
 
 const maxLength40 = maxLength(40)
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}) => {
 
   return (
     <form className={s.form} onSubmit={handleSubmit} >
@@ -44,7 +44,6 @@ const LoginForm = ({handleSubmit, error}) => {
           validate={[required, maxLength40]}
         />
       </div>
-      {error && <div className={s.formSummaryError}>{error}</div>}
       <div>
         <label className={s.checkLabel}>
           <Field
@@ -56,6 +55,17 @@ const LoginForm = ({handleSubmit, error}) => {
           remember me
         </label>
       </div>
+      {captchaUrl && <img src={captchaUrl} />}
+      {captchaUrl &&
+        <Field
+          className={s.captcha}
+          placeholder={"Symbols from image"}
+          name={"captcha"}
+          component={Input}
+          validate={[required]}
+        />
+      }
+      {error && <div className={s.formSummaryError}>{error}</div>}
       <div>
         <button className={s.loginBtn}>Login</button>
       </div>
@@ -68,7 +78,8 @@ const LoginReduxForm = reduxForm({
 })(LoginForm)
 
 const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl,
 });
 
 export default connect(mapStateToProps, { login })(Login);
