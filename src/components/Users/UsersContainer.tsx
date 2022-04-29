@@ -14,21 +14,45 @@ import { getCurrentPage,
   getPageSize,
   getTotalUsersCount,
   getUsersListSuperSelector} from "../../redux/users-selectors";
+import { UserType } from "../../types/types";
+import { AppStateType } from "../../redux/redux-store";
 
-class UsersContainer extends React.Component {
+type MapStatePropsType = {
+  currentPage: number
+  pageSize: number
+  isFetching: boolean
+  totalUsersCount: number
+  users: Array<UserType>
+  followingInProgress: Array<number>
+}
+
+type MapDispatchPropsType = {
+  unfollowThunk: (userId: number) => void
+  followThunk: (userId: number) => void
+  getUsersThunk: (currentPage: number, pageSize: number) => void
+  setCurrentPage: (pageNumber: number) => void
+}
+
+type OwnPropsType = {
+  pageTitle: string
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
+
+class UsersContainer extends React.Component<PropsType> {
   
   componentDidMount() {
     this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
   };
 
-  onPageChanged = (pageNumber) => {
+  onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber);
     this.props.getUsersThunk(pageNumber, this.props.pageSize);
   }
 
   render() {
     return <>
-      <h4>Users</h4>
+      <h4>{this.props.pageTitle}</h4>
       {this.props.isFetching ? <Preloader /> : null}
       <Users
         totalUsersCount={this.props.totalUsersCount}
@@ -44,7 +68,7 @@ class UsersContainer extends React.Component {
   }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
     users: getUsersListSuperSelector(state),
     pageSize: getPageSize(state),
@@ -55,6 +79,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { follow, unfollow, setCurrentPage,
-  getUsersThunk, followThunk, unfollowThunk}
+export default connect<MapStatePropsType, MapDispatchPropsType,
+  OwnPropsType, AppStateType>(mapStateToProps, { followThunk,
+    unfollowThunk, setCurrentPage, getUsersThunk }
 )(UsersContainer);

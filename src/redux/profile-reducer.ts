@@ -1,5 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { profileAPI, userAPI } from "../api/api";
+import { PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -7,43 +8,12 @@ const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const SAVE__PHOTO_SUCCESS = 'SAVE__PHOTO_SUCCESS';
 
-type PostType = {
-  id: number
-  message: string
-  likesCount: number
-  src: string
-}
-
-type ContactsType ={
-  github: string
-  vk: string
-  facebook: string
-  instagram: string
-  twitter: string
-  website: string
-  youtube: string
-  mainLink: string
-}
-type PhotosType ={
-  small: string | null
-  large: string | null
-}
-
-type ProfileType = {
-  userId: number
-  lookingForAJob: boolean
-  lookingForAJobDescription: string
-  fullName: string
-  contacts: ContactsType
-  photos: PhotosType
-}
-
 let initialState = {
   postData: [
     { id: 1, message: "its my first post", likesCount: 124, src: "https://images.pexels.com/photos/990349/pexels-photo-990349.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
     { id: 2, message: "yo yo yo", likesCount: 15, src: "https://images.pexels.com/photos/312839/pexels-photo-312839.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
     { id: 3, message: "hey", likesCount: 1, src: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
-    { id: 4, message: "gasdfgadfg fdgafgasg", likesCount: 5, src: "https://www.stockvault.net/data/2019/03/11/261989/thumb16.jpg" },
+    { id: 4, message: "it's nice to see you", likesCount: 5, src: "https://www.stockvault.net/data/2019/03/11/261989/thumb16.jpg" },
     { id: 5, message: "hey", likesCount: 33, src: "https://www.inpixio.com/remove-background/images/main-after.jpg" },
   ] as Array<PostType>,
   profile: null as ProfileType | null,
