@@ -1,5 +1,5 @@
 import { stopSubmit } from "redux-form";
-import { profileAPI, userAPI } from "../api/api";
+import { profileAPI } from "../api/profile-api";
 import { PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = 'ADD_POST';
@@ -91,37 +91,37 @@ type SavePhotoSuccessActionType = {
 export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => ({ type: SAVE__PHOTO_SUCCESS, photos });
 
 export const getUserProfileThunk = (userId: number) => async (dispatch: any) => {
-  const response = await userAPI.getProfile(userId);
-  dispatch(setUserProfile(response.data));
+  const response = await profileAPI.getProfile(userId);
+  dispatch(setUserProfile(response));
 };
 
 export const getStatus = (userId: number) => async (dispatch: any) => {
   const response = await profileAPI.getStatus(userId);
-  dispatch(setStatus(response.data));
+  dispatch(setStatus(response));
 };
 
 export const updateStatus = (status: string) => async (dispatch: any) => {
   const response = await profileAPI.updateStatus(status);
-  if (response.data.resultCode === 0) {
+  if (response.resultCode === 0) {
     dispatch(setStatus(status));
   }
 };
 
 export const savePhoto = (file: any) => async (dispatch: any) => {
   const response = await profileAPI.savePhoto(file);
-  if (response.data.resultCode === 0) {
-    dispatch(savePhotoSuccess(response.data.data.photos));
+  if (response.resultCode === 0) {
+    dispatch(savePhotoSuccess(response.data.photos));
   }
 };
 
 export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
   const userId = getState().auth.userId;
   const response = await profileAPI.saveProfile(profile);
-  if (response.data.resultCode === 0) {
+  if (response.resultCode === 0) {
     dispatch(getUserProfileThunk(userId));
   } else {
-    dispatch(stopSubmit("edit-profile", { _error: response.data.messages[0] }));
-    return Promise.reject(response.data.messages[0]);
+    dispatch(stopSubmit("edit-profile", { _error: response.messages[0] }));
+    return Promise.reject(response.messages[0]);
   }
 };
 
