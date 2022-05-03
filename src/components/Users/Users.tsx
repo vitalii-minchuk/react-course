@@ -1,29 +1,56 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FilterType } from "../../redux/users-reducer";
-import { UserType } from "../../types/types";
-import Pagination from "../common/Pagination/Pagination";
-import s from "./Users.module.css";
-import UsersSearchForm from "./UsersSearchForm/UsersSearchForm";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { FilterType,
+  followThunk,
+  getUsersThunk,
+  unfollowThunk } from "../../redux/users-reducer"
+import { getCurrentPage,
+  getFollowingInProgress,
+  getPageSize,
+  getTotalUsersCount,
+  getUsersFilter,
+  getUsersListSuperSelector } from "../../redux/users-selectors"
+import Pagination from "../common/Pagination/Pagination"
+import s from "./Users.module.css"
+import UsersSearchForm from "./UsersSearchForm/UsersSearchForm"
 
 const photo: string = "https://pngset.com/images/the-team-aone-group-holdings-ltd-circle-user-icon-svg-text-symbol-number-disk-transparent-png-2898374.png"
 
 type PropsType = {
-  totalUsersCount: number
-  pageSize: number
-  onPageChanged: (pageNumber: number) => void 
-  currentPage: number
-  users: Array<UserType>
-  followingInProgress: Array<number>
-  unfollowThunk: (userId: number) => void
-  followThunk: (userId: number) => void
-  onFilterChanged: (filter: FilterType) => void
 }
 
-
-const Users: React.FC<PropsType> = ({onPageChanged, followThunk, unfollowThunk, onFilterChanged, 
-  followingInProgress, users, totalUsersCount, pageSize, currentPage}) => {
+export const Users: React.FC<PropsType> = (props) => {
   
+  const followingInProgress = useSelector(getFollowingInProgress)
+  const users = useSelector(getUsersListSuperSelector)
+  const totalUsersCount = useSelector(getTotalUsersCount)
+  const currentPage = useSelector(getCurrentPage)
+  const pageSize = useSelector(getPageSize)
+  const filter = useSelector(getUsersFilter)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUsersThunk(currentPage, pageSize, filter))
+  }, [])
+
+  const onPageChanged = (pageNumber: number) => {
+    dispatch(getUsersThunk(pageNumber, pageSize, filter))
+  }
+
+  const onFilterChanged = (filter: FilterType) => {
+    dispatch(getUsersThunk(1, pageSize, filter))
+  }
+
+  const unfollow = (userId: number) => {
+    dispatch(unfollowThunk(userId))
+  }
+
+  const follow = (userId: number) => {
+    dispatch(followThunk(userId)) 
+  }
+
   return (
     <div>
       <UsersSearchForm onFilterChanged={onFilterChanged} />
@@ -42,12 +69,12 @@ const Users: React.FC<PropsType> = ({onPageChanged, followThunk, unfollowThunk, 
             {user.followed
               ? <button disabled={followingInProgress.some(id => id === user.id)}
                 className={s.followBtn}
-                onClick={() => {unfollowThunk(user.id)}}
+                onClick={() => {unfollow(user.id)}}
               >Unfollow</button>
 
               : <button disabled={followingInProgress.some(id => id === user.id)}
                 className={s.followBtn}
-                onClick={() => {followThunk(user.id)}}
+                onClick={() => {follow(user.id)}}
               >Follow</button>
             }
           </div>
@@ -64,8 +91,5 @@ const Users: React.FC<PropsType> = ({onPageChanged, followThunk, unfollowThunk, 
         </div>)
       }
     </div>
-  );
-};
-
-
-export default Users;
+  )
+}
