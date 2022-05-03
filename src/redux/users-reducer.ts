@@ -11,6 +11,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+const SET_FILTER = 'SET_FILTER'
 
 let initialState = {
   users: [] as Array<UserType>,
@@ -18,10 +19,15 @@ let initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
-  followingInProgress: [] as Array<number>
+  followingInProgress: [] as Array<number>,
+  filter: {
+    term: '',
+    friend: null as null | boolean
+  }
 }
 
 export type InitialStateType = typeof initialState
+export type FilterType = typeof initialState.filter
 
 const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
   switch (action.type) {
@@ -53,6 +59,8 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
       return { ...state, totalUsersCount: action.count }
     case TOGGLE_IS_FETCHING:
       return { ...state, isFetching: action.isFetching }
+    case SET_FILTER:
+      return { ...state, filter: action.payload }
     case TOGGLE_IS_FOLLOWING_PROGRESS:
       return {
         ...state,
@@ -66,7 +74,7 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
 }
 
 type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType |
-  SetTotalUsersCountActionType | ToggleIsFetchingActionType | ToggleFollowingProgressActionType
+  SetTotalUsersCountActionType | ToggleIsFetchingActionType | ToggleFollowingProgressActionType | SetFilterActionType
 
 type FollowActionType = {
   type: typeof FOLLOW
@@ -111,13 +119,21 @@ type ToggleFollowingProgressActionType = {
 }
 export const toggleFollowingProgress = (isFetching: boolean, userId: number): ToggleFollowingProgressActionType => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 
+type SetFilterActionType = {
+  type: typeof SET_FILTER
+  payload: FilterType
+}
+export const setFilter = (filter: FilterType): SetFilterActionType => ({type: SET_FILTER, payload: filter})
+
 type GetStateType = () => AppStateType
 type DispatchType = Dispatch<ActionsTypes>
 type ThunkType = BaseThunkType<ActionsTypes>
 
-export const getUsersThunk = (page: number, pageSize: number): ThunkType => async (dispatch, getState) => {
+export const getUsersThunk = (page: number, pageSize: number, filter: FilterType): ThunkType => async (dispatch, getState) => {
   dispatch(toggleIsFetching(true))
-  let data = await userAPI.getUsers(page, pageSize)
+  dispatch(setCurrentPage(page))
+  dispatch(setFilter(filter))
+  let data = await userAPI.getUsers(page, pageSize, filter.term, filter.friend)
   dispatch(toggleIsFetching(false))
   dispatch(setUsers(data.items))
   dispatch(setTotalUsersCount(data.totalCount))

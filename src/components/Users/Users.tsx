@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FilterType } from "../../redux/users-reducer";
 import { UserType } from "../../types/types";
 import Pagination from "../common/Pagination/Pagination";
 import s from "./Users.module.css";
+import UsersSearchForm from "./UsersSearchForm/UsersSearchForm";
 
 const photo: string = "https://pngset.com/images/the-team-aone-group-holdings-ltd-circle-user-icon-svg-text-symbol-number-disk-transparent-png-2898374.png"
 
@@ -15,14 +17,16 @@ type PropsType = {
   followingInProgress: Array<number>
   unfollowThunk: (userId: number) => void
   followThunk: (userId: number) => void
+  onFilterChanged: (filter: FilterType) => void
 }
 
 
-const Users: React.FC<PropsType> = ({onPageChanged, followThunk, unfollowThunk,
+const Users: React.FC<PropsType> = ({onPageChanged, followThunk, unfollowThunk, onFilterChanged, 
   followingInProgress, users, totalUsersCount, pageSize, currentPage}) => {
   
   return (
     <div>
+      <UsersSearchForm onFilterChanged={onFilterChanged} />
       <Pagination
         onPageChanged={onPageChanged}
         totalUsersCount={totalUsersCount}
@@ -62,5 +66,6 @@ const Users: React.FC<PropsType> = ({onPageChanged, followThunk, unfollowThunk,
     </div>
   );
 };
+
 
 export default Users;
