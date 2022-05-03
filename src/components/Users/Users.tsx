@@ -1,3 +1,5 @@
+import { createBrowserHistory } from "history"
+import QueryString from "qs"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
@@ -30,10 +32,37 @@ export const Users: React.FC<PropsType> = (props) => {
   const filter = useSelector(getUsersFilter)
 
   const dispatch = useDispatch()
+  const history = createBrowserHistory()
+ 
+  useEffect(() => {
+    const  search  = history.location.search
+    const parsed = QueryString.parse(search.substring(1)) as {term: string , friend: string , page: string}
+
+    let actualPage = currentPage
+    let actualFilter = filter
+
+    if (!!parsed.page) actualPage = Number(parsed.page)
+    if (!!parsed.term) actualFilter = {...actualFilter, term: parsed.term as string}
+    switch(parsed.friend) {
+      case "null": 
+        actualFilter = {...actualFilter, friend: null}
+        break
+      case "true": 
+        actualFilter = {...actualFilter, friend: true}
+        break
+      case "false": 
+        actualFilter = {...actualFilter, friend: false}
+        break
+    }
+    dispatch(getUsersThunk(actualPage, pageSize, actualFilter))
+  }, [])
 
   useEffect(() => {
-    dispatch(getUsersThunk(currentPage, pageSize, filter))
-  }, [])
+    history.push({
+      pathname: "/users",
+      search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
+    })
+  }, [filter, currentPage])
 
   const onPageChanged = (pageNumber: number) => {
     dispatch(getUsersThunk(pageNumber, pageSize, filter))
