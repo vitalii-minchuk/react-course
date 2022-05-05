@@ -13,6 +13,9 @@ const Navbar = () => {
             <Link to='/dialogues'>Dialogues</Link>
           </li>
           <li className={s.item}>
+            <Link to='/chat'>Chat</Link>
+          </li>
+          <li className={s.item}>
             <a href='#'>News</a>
           </li>
           <li className={s.item}>

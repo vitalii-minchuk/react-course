@@ -12,6 +12,7 @@ import { initializeApp } from './redux/app-reducer'
 
 const DialoguesContainer = React.lazy(() => import('./components/Dialogues/DialoguesContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'))
 
 class App extends React.Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends React.Component {
                 <Route path='/dialogues/*' element={<DialoguesContainer />} />
                 <Route path='/users' element={<UsersPage pageTitle={'Users'} />} />
                 <Route path='/login' element={<LoginPage />} />
+                <Route path='/chat' element={<ChatPage />} />
                 <Route path='*' element={<ErrorPage />} />
               </Routes>
             </Suspense>

@@ -22,6 +22,12 @@ const photo: string = "https://pngset.com/images/the-team-aone-group-holdings-lt
 type PropsType = {
 }
 
+type QueryParamsType = {
+  term?: string
+  friend?: string
+  page?: string
+}
+
 export const Users: React.FC<PropsType> = (props) => {
   
   const followingInProgress = useSelector(getFollowingInProgress)
@@ -36,7 +42,7 @@ export const Users: React.FC<PropsType> = (props) => {
  
   useEffect(() => {
     const  search  = history.location.search
-    const parsed = QueryString.parse(search.substring(1)) as {term: string , friend: string , page: string}
+    const parsed = QueryString.parse(search.substring(1)) as QueryParamsType
 
     let actualPage = currentPage
     let actualFilter = filter
@@ -58,9 +64,15 @@ export const Users: React.FC<PropsType> = (props) => {
   }, [])
 
   useEffect(() => {
+    const query: QueryParamsType = {}
+
+    if(!!filter.term) query.term = filter.term
+    if(filter.friend !== null) query.friend = String(filter.friend)
+    if(currentPage !== 1) query.page = String(currentPage)
+
     history.push({
       pathname: "/users",
-      search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
+      search: QueryString.stringify(query)
     })
   }, [filter, currentPage])
 
