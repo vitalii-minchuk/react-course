@@ -19,13 +19,13 @@ const Navbar = () => {
             <a href='#'>News</a>
           </li>
           <li className={s.item}>
-            <a href='#'>Music</a>
+            <Link to='/music'>Music</Link>
           </li>
           <li className={s.item}>
             <Link to='/users'>Users</Link>
           </li>
           <li className={s.item}>
-            <a className={s.active} href='#'>Settings</a>
+            <Link to='/settings'>Settings</Link>
           </li>
         </ul>
       </nav>

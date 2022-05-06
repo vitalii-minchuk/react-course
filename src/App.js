@@ -6,7 +6,9 @@ import Preloader from './components/common/preloader/Preloader'
 import ErrorPage from './components/ErrorPage/ErrorPage'
 import HeaderContainer from './components/Header/HeaderContainer'
 import { LoginPage } from './components/Login/Login'
+import MusicPage from './components/Music/Music'
 import Navbar from './components/Navbar/Navbar'
+import SettingsPage from './components/Setting/Settings'
 import UsersPage from './components/Users/UsersContainer'
 import { initializeApp } from './redux/app-reducer'
 
@@ -38,6 +40,8 @@ class App extends React.Component {
                 <Route path='/users' element={<UsersPage pageTitle={'Users'} />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/chat' element={<ChatPage />} />
+                <Route path='/music' element={<MusicPage />} />
+                <Route path='/settings' element={<SettingsPage />} />
                 <Route path='*' element={<ErrorPage />} />
               </Routes>
             </Suspense>

@@ -1,0 +1,21 @@
+.title {
+  margin-bottom: 20px;
+}
+
+.box {
+  display: flex;
+  gap: 80px;
+}
+
+.list li{
+  cursor: pointer;
+  transition: all .3s;
+}
+.list li:hover{
+  text-decoration: underline;
+}
+
+.selected {
+  color: #222;
+}
+
