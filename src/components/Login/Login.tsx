@@ -1,4 +1,5 @@
 import React from "react"
+// @ts-ignore
 import s from "./Login.module.css"
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { Input } from "../common/FormsControls/FormsControls"

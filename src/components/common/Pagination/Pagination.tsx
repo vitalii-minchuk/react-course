@@ -1,4 +1,5 @@
 import React from "react"
+// @ts-ignore
 import s from "./Pagination.module.css"
 
 type PropsType = {

@@ -26,6 +26,11 @@
   transition: all .3s;
 }
 
+.btn:disabled {
+  color: #E26578;
+  border: 1px solid #E26578;
+}
+
 .btn:hover {
   color: #333;
   background-color: #999;

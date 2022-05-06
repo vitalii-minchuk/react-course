@@ -14,6 +14,7 @@ import { getCurrentPage,
   getUsersFilter,
   getUsersListSuperSelector } from "../../redux/users-selectors"
 import Pagination from "../common/Pagination/Pagination"
+// @ts-ignore
 import s from "./Users.module.css"
 import UsersSearchForm from "./UsersSearchForm/UsersSearchForm"
 

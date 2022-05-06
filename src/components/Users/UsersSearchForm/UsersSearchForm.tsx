@@ -3,6 +3,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { FilterType } from "../../../redux/users-reducer"
 import { getUsersFilter } from "../../../redux/users-selectors"
+// @ts-ignore
 import s from "./UsersSearchForm.module.css"
 
 type FriendFormType = "true" | "false" | "null"
