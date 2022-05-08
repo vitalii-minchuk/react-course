@@ -15,7 +15,15 @@
   text-decoration: underline;
 }
 
+.img {
+  width: 177px;
+}
+
 .selected {
   color: #222;
 }
 
+.topBox {
+  display: flex;
+  gap: 170px
+}
